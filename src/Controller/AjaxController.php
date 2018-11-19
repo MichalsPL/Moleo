@@ -30,8 +30,9 @@ class AjaxController extends AbstractController
   public function getChartData(Request $request)
   {
     $result = [];
+    $requestedCurrencies=$request->request->get('currencies');
     $em = $this->getDoctrine()->getManager();
-    $currencies = $em->getRepository(Currency::class)->findBy(['code' => ['USD', 'AUD']]);
+    $currencies = $em->getRepository(Currency::class)->findBy(['code' => $requestedCurrencies]);
 
     if (!$currencies) {
       return new JsonResponse(
@@ -46,17 +47,25 @@ class AjaxController extends AbstractController
       $currencyData = [];
       $currencyData['name'] = $currency->getName();
       $currencyData['code'] = $currency->getCode();
-      $currecyHistory = $em->getRepository(ExchangeRateHistory::class)->findResultBetweenDates('2018-11-15', '2018-11-19');
+      $currecyHistory = $em->getRepository(ExchangeRateHistory::class)->findResultBetweenDates($currency,'2017-11-15', '2018-11-19');
       $currencyDa = [];
+     // dump($currecyHistory);die;
       foreach ($currecyHistory as $currencyDateData) {
+
         $curentData = [];
-        $curentData['date'] = $currencyDateData->getDate()->format('Y-M-d');
-        $curentData['bid_price'] = $currencyDateData->getBidPrice();
-        $curentData['ask_price'] = $currencyDateData->getAskPrice();
+        $curentData['date'] = $currencyDateData->getDate()->format('Y-m-d');
+        if($currencyDateData->getMidPrice()){
+          $curentData['mid_price']=$currencyDateData->getMidPrice();
+        }else{
+          $curentData['mid_price']=($currencyDateData->getBidPrice()+$currencyDateData->getAskPrice())/2;
+        }
+        $currencyData['history'][] = $curentData;
       }
-      $currencyData['history'][] = $curentData;
+
       $result[]=$currencyData;
     }
+//     dump($result);die;
+
 
 
     return new JsonResponse(

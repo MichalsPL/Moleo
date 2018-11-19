@@ -1,58 +1,74 @@
 $(document).ready(function(){
 var dps = [];
 
-var chart = new CanvasJS.Chart("chartContainer",
-    {
-        title: {
-            text: "Chart with Date Selector"
-        },
-        data: [
-            {
-                type: "line",
-                dataPoints: randomData(new Date(2017, 0, 1), 400)
-            }
-        ]
-    });
-chart.render();
-
-var axisXMin = chart.axisX[0].get("minimum");
-var axisXMax = chart.axisX[0].get("maximum");
-
-function randomData(startX, numberOfY){
-    var xValue, yValue = 0;
-    for (var i = 0; i < 400; i += 1) {
-        xValue = new Date(startX.getTime() + (i * 24 * 60 * 60 * 1000));
-        yValue += (Math.random() * 10 - 5) << 0;
-
-        dps.push({
-            x: xValue,
-            y: yValue
+function PrepareCanvasJs(data){
+    var chart = new CanvasJS.Chart("chartContainer",
+        {
+            title: {
+                text: "Chart with Date Selector"
+            },
+            axisX:{
+                interval: 1,
+                intervalType: "day",
+            },
+            data: data
         });
-    }
-    return dps;
+    chart.render();
+
+    var axisXMin = chart.axisX[0].get("minimum");
+    var axisXMax = chart.axisX[0].get("maximum");
+         $("#fromDate").val(CanvasJS.formatDate(axisXMin, "DD MMM YYYY"));
+     $("#toDate").val(CanvasJS.formatDate(axisXMax, "DD MMM YYYY"));
+     $("#fromDate").datepicker({dateFormat: "d M yy"});
+     $("#toDate").datepicker({dateFormat: "d M yy"});
+    $("#date-selector").change( function() {
+        var minValue = $( "#fromDate" ).val();
+        var maxValue = $ ( "#toDate" ).val();
+
+        if(new Date(minValue).getTime() < new Date(maxValue).getTime()){
+            chart.axisX[0].set("minimum", new Date(minValue));
+            chart.axisX[0].set("maximum", new Date(maxValue));
+        }
+    });
 }
+
+// var chart = new CanvasJS.Chart("chartContainer",
+//     {
+//         title: {
+//             text: "Chart with Date Selector"
+//         },
+//         data: data
+//     });
+// chart.render();
+
+
 function getData(){
     $.ajax({
         url: "/ajax/getCurrencies",
-        type: "GET",
-        data: {id : 1},
+        type: "POST",
+        data: {
+            currencies : $('#my-select').val(),
+            date_start:2,
+            date_end:3
+        },
         dataType: "json",
         success: function(Response){
-            prepareData(Response);
+            var charData=prepareData(Response);
+            PrepareCanvasJs(charData);
         }
     });
 }
 getData();
-function PrepareDailyHistory(dailyData){
+function PrepareDailyHistory(dailyData,currencyName){
     var result = []
-    console.log('aaaaaaaaaaaa');
-    console.log(dailyData);
+
     $.each(dailyData,function(){
         var t = this;
-        result.push({ x: new Date(t.date), y: t.bid_price })
+        console.log(t)
+        result.push({ x: new Date(t.date.split('-')[0],t.date.split('-')[1],t.date.split('-')[2]), y: t.mid_price })
 
     });
-    console.log(result);
+    console.log(result)
     return result;
 }
 function prepareData(data){
@@ -63,38 +79,19 @@ function prepareData(data){
             name: value.name,
             type: "spline",
             showInLegend: true,
-            dataPoints: PrepareDailyHistory(value.history)
+            dataPoints: PrepareDailyHistory(value.history,value.name)
 
         });
     });
-
     return result;
 }
 
-
-$( function() {
-    $("#fromDate").val(CanvasJS.formatDate(axisXMin, "DD MMM YYYY"));
-    $("#toDate").val(CanvasJS.formatDate(axisXMax, "DD MMM YYYY"));
-    $("#fromDate").datepicker({dateFormat: "d M yy"});
-    $("#toDate").datepicker({dateFormat: "d M yy"});
-});
-
-$("#date-selector").change( function() {
-    var minValue = $( "#fromDate" ).val();
-    var maxValue = $ ( "#toDate" ).val();
-
-    if(new Date(minValue).getTime() < new Date(maxValue).getTime()){
-        chart.axisX[0].set("minimum", new Date(minValue));
-        chart.axisX[0].set("maximum", new Date(maxValue));
-    }
-});
-
     $('#my-select').multiSelect({
         afterSelect: function(values){
-            alert("Select value: "+values);
+            getData()
         },
         afterDeselect: function(values){
-            alert("Deselect value: "+values);
+            getData()
         }
     });
 });

@@ -12,8 +12,8 @@
     </database>
     <schema id="4" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-11-19.09:28:46.050</IntrospectionTimestamp>
-      <IntrospectionStateNumber>549</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-11-19.13:04:41.051</IntrospectionTimestamp>
+      <IntrospectionStateNumber>582</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -48,7 +48,7 @@
     </table>
     <table id="13" parent="4" name="exchange_rate_history">
       <ObjectId>16400</ObjectId>
-      <StateNumber>549</StateNumber>
+      <StateNumber>582</StateNumber>
     </table>
     <table id="14" parent="4" name="migration_versions">
       <ObjectId>16385</ObjectId>
@@ -104,31 +104,34 @@
     <column id="23" parent="13" name="ask_price">
       <Position>4</Position>
       <DataType>double precision|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>549</StateNumber>
+      <StateNumber>582</StateNumber>
     </column>
     <column id="24" parent="13" name="bid_price">
       <Position>5</Position>
       <DataType>double precision|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>549</StateNumber>
+      <StateNumber>582</StateNumber>
     </column>
-    <index id="25" parent="13" name="exchange_rate_history_pkey">
+    <column id="25" parent="13" name="mid_price">
+      <Position>6</Position>
+      <DataType>double precision|0</DataType>
+      <StateNumber>582</StateNumber>
+    </column>
+    <index id="26" parent="13" name="exchange_rate_history_pkey">
       <ObjectId>16403</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="26" parent="13" name="idx_51c18a9938248176">
+    <index id="27" parent="13" name="idx_51c18a9938248176">
       <ObjectId>16405</ObjectId>
       <ColNames>currency_id</ColNames>
     </index>
-    <key id="27" parent="13" name="exchange_rate_history_pkey">
+    <key id="28" parent="13" name="exchange_rate_history_pkey">
       <ObjectId>16404</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>exchange_rate_history_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="28" parent="13" name="fk_51c18a9938248176">
+    <foreign-key id="29" parent="13" name="fk_51c18a9938248176">
       <ObjectId>16406</ObjectId>
       <ColNames>currency_id</ColNames>
       <RefTableId>16394</RefTableId>
@@ -137,18 +140,18 @@
       <RefKeyName>currency_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="29" parent="14" name="version">
+    <column id="30" parent="14" name="version">
       <Position>1</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>548</StateNumber>
     </column>
-    <index id="30" parent="14" name="migration_versions_pkey">
+    <index id="31" parent="14" name="migration_versions_pkey">
       <ObjectId>16388</ObjectId>
       <ColNames>version</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="31" parent="14" name="migration_versions_pkey">
+    <key id="32" parent="14" name="migration_versions_pkey">
       <ObjectId>16389</ObjectId>
       <ColNames>version</ColNames>
       <UnderlyingIndexName>migration_versions_pkey</UnderlyingIndexName>

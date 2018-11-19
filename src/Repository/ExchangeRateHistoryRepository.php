@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Currency;
 use App\Entity\ExchangeRateHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -22,12 +23,14 @@ class ExchangeRateHistoryRepository extends ServiceEntityRepository
     // /**
     //  * @return ExchangeRateHistory[] Returns an array of ExchangeRateHistory objects
     //  */
-  public function findResultBetweenDates(string $start, string $end)
+  public function findResultBetweenDates(Currency $currency,string $start, string $end)
   {
     return $this->createQueryBuilder('e')
-      ->where('e.date BETWEEN :monday AND :sunday')
+      ->where('e.date BETWEEN :monday AND :sunday AND e.currency = :currency ORDER BY e.date ASC')
       ->setParameter('monday', $start)
       ->setParameter('sunday', $end)
+      ->setParameter('currency', $currency)
+
       ->getQuery()
       ->getResult()
       ;
