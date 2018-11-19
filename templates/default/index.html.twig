@@ -8,15 +8,15 @@
     <table>
         <tr>
             {# sorting of properties based on query components #}
-            <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
-            <th{% if pagination.isSorted('a.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'name', 'a.name') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Code', ['a.code', 'a.code']) }}</th>
+            {#<th>{{ knp_pagination_sortable(pagination, 'Id', 'c.id') }}</th>#}
+            <th{% if pagination.isSorted('c.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'name', 'c.name') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Code', ['c.code', 'c.code']) }}</th>
         </tr>
 
         {# table body #}
         {% for article in pagination %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ article.id }}</td>
+                {#<td>{{ article.id }}</td>#}
                 <td>{{ article.name }}</td>
                 <td>{{ article.code }}</td>
             </tr>
