@@ -22,19 +22,16 @@ class ExchangeRateHistoryRepository extends ServiceEntityRepository
     // /**
     //  * @return ExchangeRateHistory[] Returns an array of ExchangeRateHistory objects
     //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+  public function findResultBetweenDates(string $start, string $end)
+  {
+    return $this->createQueryBuilder('e')
+      ->where('e.date BETWEEN :monday AND :sunday')
+      ->setParameter('monday', $start)
+      ->setParameter('sunday', $end)
+      ->getQuery()
+      ->getResult()
+      ;
+  }
 
     /*
     public function findOneBySomeField($value): ?ExchangeRateHistory

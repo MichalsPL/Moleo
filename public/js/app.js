@@ -31,6 +31,46 @@ function randomData(startX, numberOfY){
     }
     return dps;
 }
+function getData(){
+    $.ajax({
+        url: "/ajax/getCurrencies",
+        type: "GET",
+        data: {id : 1},
+        dataType: "json",
+        success: function(Response){
+            prepareData(Response);
+        }
+    });
+}
+getData();
+function PrepareDailyHistory(dailyData){
+    var result = []
+    console.log('aaaaaaaaaaaa');
+    console.log(dailyData);
+    $.each(dailyData,function(){
+        var t = this;
+        result.push({ x: new Date(t.date), y: t.bid_price })
+
+    });
+    console.log(result);
+    return result;
+}
+function prepareData(data){
+    var result =[];
+    $.each(data,function(index,value){
+
+        result.push({
+            name: value.name,
+            type: "spline",
+            showInLegend: true,
+            dataPoints: PrepareDailyHistory(value.history)
+
+        });
+    });
+
+    return result;
+}
+
 
 $( function() {
     $("#fromDate").val(CanvasJS.formatDate(axisXMin, "DD MMM YYYY"));

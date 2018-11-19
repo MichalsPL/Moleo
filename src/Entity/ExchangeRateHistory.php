@@ -28,14 +28,19 @@ class ExchangeRateHistory
     private $currency;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $ask_price;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $bid_price;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $mid_price;
 
     public function getId(): ?int
     {
@@ -86,6 +91,18 @@ class ExchangeRateHistory
     public function setBidPrice(float $bid_price): self
     {
         $this->bid_price = $bid_price;
+
+        return $this;
+    }
+
+    public function getMidPrice(): ?float
+    {
+        return $this->mid_price;
+    }
+
+    public function setMidPrice(?float $mid_price): self
+    {
+        $this->mid_price = $mid_price;
 
         return $this;
     }
