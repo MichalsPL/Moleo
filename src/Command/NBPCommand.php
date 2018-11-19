@@ -12,7 +12,6 @@ namespace App\Command;
 class NBPCommand extends AbstractCommand
 {
 
-
   protected function fetchData(): array
   {
     $tables = ['a', 'b', 'c'];

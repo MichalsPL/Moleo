@@ -20,31 +20,5 @@ class ExchangeRateHistoryRepository extends ServiceEntityRepository
         parent::__construct($registry, ExchangeRateHistory::class);
     }
 
-    // /**
-    //  * @return ExchangeRateHistory[] Returns an array of ExchangeRateHistory objects
-    //  */
-  public function findResultBetweenDates(Currency $currency,string $start, string $end)
-  {
-    return $this->createQueryBuilder('e')
-      ->where('e.date BETWEEN :monday AND :sunday AND e.currency = :currency ORDER BY e.date ASC')
-      ->setParameter('monday', $start)
-      ->setParameter('sunday', $end)
-      ->setParameter('currency', $currency)
 
-      ->getQuery()
-      ->getResult()
-      ;
-  }
-
-    /*
-    public function findOneBySomeField($value): ?ExchangeRateHistory
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

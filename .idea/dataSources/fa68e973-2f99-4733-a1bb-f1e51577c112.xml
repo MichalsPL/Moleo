@@ -12,8 +12,8 @@
     </database>
     <schema id="4" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-11-19.13:04:41.051</IntrospectionTimestamp>
-      <IntrospectionStateNumber>582</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-11-19.16:15:06.117</IntrospectionTimestamp>
+      <IntrospectionStateNumber>3378</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -33,52 +33,52 @@
       <ObjectId>12116</ObjectId>
     </schema>
     <sequence id="10" parent="4" name="currency_id_seq">
-      <ObjectId>16390</ObjectId>
-      <StateNumber>549</StateNumber>
+      <ObjectId>24582</ObjectId>
+      <StateNumber>3378</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="11" parent="4" name="exchange_rate_history_id_seq">
-      <ObjectId>16392</ObjectId>
-      <StateNumber>549</StateNumber>
+      <ObjectId>24584</ObjectId>
+      <StateNumber>3378</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <table id="12" parent="4" name="currency">
-      <ObjectId>16394</ObjectId>
-      <StateNumber>549</StateNumber>
+      <ObjectId>24586</ObjectId>
+      <StateNumber>3378</StateNumber>
     </table>
     <table id="13" parent="4" name="exchange_rate_history">
-      <ObjectId>16400</ObjectId>
-      <StateNumber>582</StateNumber>
+      <ObjectId>24592</ObjectId>
+      <StateNumber>3378</StateNumber>
     </table>
     <table id="14" parent="4" name="migration_versions">
-      <ObjectId>16385</ObjectId>
-      <StateNumber>548</StateNumber>
+      <ObjectId>24577</ObjectId>
+      <StateNumber>3377</StateNumber>
     </table>
     <column id="15" parent="12" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>549</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <column id="16" parent="12" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
-      <StateNumber>549</StateNumber>
+      <StateNumber>3378</StateNumber>
       <DefaultExpression>NULL::character varying</DefaultExpression>
     </column>
     <column id="17" parent="12" name="code">
       <Position>3</Position>
       <DataType>varchar(3)|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>549</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <index id="18" parent="12" name="currency_pkey">
-      <ObjectId>16398</ObjectId>
+      <ObjectId>24590</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="19" parent="12" name="currency_pkey">
-      <ObjectId>16399</ObjectId>
+      <ObjectId>24591</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>currency_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
@@ -87,54 +87,54 @@
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>549</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <column id="21" parent="13" name="currency_id">
       <Position>2</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>549</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <column id="22" parent="13" name="date">
       <Position>3</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>549</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <column id="23" parent="13" name="ask_price">
       <Position>4</Position>
       <DataType>double precision|0</DataType>
-      <StateNumber>582</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <column id="24" parent="13" name="bid_price">
       <Position>5</Position>
       <DataType>double precision|0</DataType>
-      <StateNumber>582</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <column id="25" parent="13" name="mid_price">
       <Position>6</Position>
       <DataType>double precision|0</DataType>
-      <StateNumber>582</StateNumber>
+      <StateNumber>3378</StateNumber>
     </column>
     <index id="26" parent="13" name="exchange_rate_history_pkey">
-      <ObjectId>16403</ObjectId>
+      <ObjectId>24595</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <index id="27" parent="13" name="idx_51c18a9938248176">
-      <ObjectId>16405</ObjectId>
+      <ObjectId>24597</ObjectId>
       <ColNames>currency_id</ColNames>
     </index>
     <key id="28" parent="13" name="exchange_rate_history_pkey">
-      <ObjectId>16404</ObjectId>
+      <ObjectId>24596</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>exchange_rate_history_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
     <foreign-key id="29" parent="13" name="fk_51c18a9938248176">
-      <ObjectId>16406</ObjectId>
+      <ObjectId>24598</ObjectId>
       <ColNames>currency_id</ColNames>
-      <RefTableId>16394</RefTableId>
+      <RefTableId>24586</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>currency</RefTableName>
       <RefKeyName>currency_pkey</RefKeyName>
@@ -144,15 +144,15 @@
       <Position>1</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>548</StateNumber>
+      <StateNumber>3377</StateNumber>
     </column>
     <index id="31" parent="14" name="migration_versions_pkey">
-      <ObjectId>16388</ObjectId>
+      <ObjectId>24580</ObjectId>
       <ColNames>version</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="32" parent="14" name="migration_versions_pkey">
-      <ObjectId>16389</ObjectId>
+      <ObjectId>24581</ObjectId>
       <ColNames>version</ColNames>
       <UnderlyingIndexName>migration_versions_pkey</UnderlyingIndexName>
       <Primary>1</Primary>

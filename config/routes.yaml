@@ -1,3 +1,14 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+    methods:    [GET]
+list:
+    path: /list
+    controller: App\Controller\DefaultController::currencyList
+    methods:    [GET]
+chart:
+    path: /chart
+    controller: App\Controller\DefaultController::CurrencyRateChart
+ajax_get_chart_data:
+    path: /ajax/getCurrencies
+    controller: App\Controller\AjaxController::getChartData

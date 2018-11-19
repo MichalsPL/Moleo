@@ -19,23 +19,4 @@ class CurrencyRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Currency::class);
     }
-
-    // /**
-    //  * @return Currency[] Returns an array of Currency objects
-    //  */
-
-
-
-
-    /*
-    public function findOneBySomeField($value): ?Currency
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

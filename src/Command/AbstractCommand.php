@@ -25,10 +25,11 @@ abstract class AbstractCommand extends Command
   protected function configure()
   {
     $reflect = new \ReflectionClass($this);
+    $className = $reflect->getShortName();
     $this
-      ->setName('get:' . $reflect->getShortName())
-      ->setDescription('Getting current rates for ' . get_called_class())
-      ->setHelp('This command is getting curent rates for class' . get_called_class());
+      ->setName('get:' . $className)
+      ->setDescription('Getting current rates for ' . $className)
+      ->setHelp('This command is getting curent rates for class' . $className);
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)

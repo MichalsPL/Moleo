@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <a href="{{ path('index') }}">strona główna</a>
+    <div class="count">
+        {{ pagination.getTotalItemCount }}
+    </div>
+    <table>
+        <tr>
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'c.id') }}</th>
+            <th{% if pagination.isSorted('c.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'name', 'c.name') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Code', ['c.code', 'c.code']) }}</th>
+        </tr>
+
+        {# table body #}
+        {% for currency in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ currency.id }}</td>
+                <td>{{ currency.name }}</td>
+                <td>{{ currency.code }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
